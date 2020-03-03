@@ -214,6 +214,7 @@ void College::operator =(const College& other)
 	delete head;
 
 	fullname = other.fullname;
+	node* otherh = other.head;
 	if(otherh == NULL)
 	{
 		cursor->set_data(otherh->data());
