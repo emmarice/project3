@@ -161,25 +161,25 @@ College::College(const College& other)
 	fullname = other.fullname;
 	head = new node;
 	node* cursor = head;
-	if(other.head == NULL)
+	node* otherh = other.head;
+	if(otherh == NULL)
 	{
-		head = NULL;
+		cursor->set_data(otherh->data());
+		cursor->set_link(NULL);
 		return;
 	}
 	else
 	{
-		while(other.head!=NULL)
+		cursor->set_data(otherhd->data());
+	    otherh = otherh->link();
+		while(otherh!=NULL)
 	    {
-	    	cursor->set_data(other.head->data());
-	    	other.head->set_link(other.head->link());
-	    	if(other.head== NULL)
-	    	{
-	    		cursor->set_link(NULL);
-	    		return;
-	    	}
 	    	cursor->set_link(new node);
 	    	cursor = cursor->link();
+	    	cursor->set_data(otherh->data());
+			otherh=otherh->link();
 	    }//while
+	    cursor->set_link(NULL);
 	}//else
 }
 void College::operator =(const College& other)
@@ -211,7 +211,7 @@ void College::operator =(const College& other)
 	    {
 	    	cursor->set_data(other.head->data());
 	    	other.head->set_link(other.head->link());
-	    	if(other.head== NULL)
+	    	if(other.head == NULL)
 	    	{
 	    		cursor->set_link(NULL);
 	    		return;
