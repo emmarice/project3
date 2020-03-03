@@ -1,14 +1,14 @@
 // college.h
 //Emma Rice
 //3/1/2020
-#ifndef COLLEGE_H
-#define COLLEGE_H
-#include "course.h"
+
 #include "Node.h"
+#include "course.h"
 #include <iostream>
 #include <fstream>
 #include <string>
-
+#ifndef COLLEGE_H
+#define COLLEGE_H
 class College
 {
 	public:

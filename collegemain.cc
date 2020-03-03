@@ -15,8 +15,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "course.h"
 #include "Node.h"
+#include "course.h"
 #include "college.h"
 
 using namespace std;

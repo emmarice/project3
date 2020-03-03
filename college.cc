@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-using namespace std;
+
 
 void College::add(course c)
 {
@@ -94,6 +94,7 @@ int College::hours()
 		hrs+= cursor->data().get_hours();
 		cursor = cursor->link();
 	}
+	return hrs;
 }
 
 double College::gpa()
@@ -118,8 +119,8 @@ void College::load(std::istream& ins)
 	cursor = new node;
 	node* prev = cursor;
 	course c;
-	while(ins.peek()=='\n')cin.ignore();
-    getline(cin,fullname);
+	while(ins.peek()=='\n')ins.ignore();
+    getline(ins,fullname);
     while(!ins.eof())
     {
     	ins >> c;
@@ -168,13 +169,14 @@ College::College(const College& other)
 		while(other.head!=NULL)
 	    {
 	    	cursor->set_data(other.head->data());
-	    	other.head = other.head->link();
+	    	other.head->set_link(other.head->link());
 	    	if(other.head== NULL)
 	    	{
 	    		cursor->set_link(NULL);
 	    		return;
 	    	}
-	    	cursor = cursor->set_link(new node);
+	    	cursor->set_link(new node);
+	    	cursor = cursor->link();
 	    }//while
 	}//else
 }
@@ -206,13 +208,14 @@ void College::operator =(const College& other)
 		while(other.head!=NULL)
 	    {
 	    	cursor->set_data(other.head->data());
-	    	other.head = other.head->link();
+	    	other.head->set_link(other.head->link());
 	    	if(other.head== NULL)
 	    	{
 	    		cursor->set_link(NULL);
 	    		return;
 	    	}
-	    	cursor = cursor->set_link(new node);
+	    	cursor->set_link(new node);
+	    	cursor = cursor->link();
 	    }//while
 	}//else
 }
