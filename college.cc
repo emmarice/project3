@@ -115,9 +115,9 @@ void College::load(std::istream& ins)
 {
 	//load the student’s name (which will be the first thing 
 	//in the file) and list of courses when it starts up
+	head = new node;
 	node* cursor = head;
-	cursor = new node;
-	node* prev = cursor;
+	node* prev;
 	course c;
 	while(ins.peek()=='\n')ins.ignore();
     getline(ins,fullname);
@@ -135,7 +135,7 @@ void College::load(std::istream& ins)
 void College::save(std::ostream& outs)
 {
 	//save the altered list to the same file when it is exiting
-	outs << fullname;
+	outs << fullname << endl;
 	node* cursor = head;
 	while(cursor!=NULL)
     {
