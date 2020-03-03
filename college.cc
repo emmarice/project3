@@ -117,19 +117,20 @@ void College::load(std::istream& ins)
 	//in the file) and list of courses when it starts up
 	head = new node;
 	node* cursor = head;
-	node* prev;
 	course c;
 	while(ins.peek()=='\n')ins.ignore();
     getline(ins,fullname);
+    ins >> c;
+    cursor->set_data(c);
+    ins >> c;
     while(!ins.eof())
     {
-    	ins >> c;
-    	cursor->set_data(c);
     	cursor->set_link(new node);
-    	prev = cursor;
     	cursor = cursor->link();
+    	cursor->set_data(c);
+    	ins >> c;
     }
-    prev->set_link(NULL);
+    cursor->set_link(NULL);
 }
 
 void College::save(std::ostream& outs)
@@ -158,6 +159,7 @@ College::~College()
 College::College(const College& other)
 {
 	fullname = other.fullname;
+	head = new node;
 	node* cursor = head;
 	if(other.head == NULL)
 	{
