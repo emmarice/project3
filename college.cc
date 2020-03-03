@@ -19,7 +19,7 @@ void College::add(course c)
 	{
 		node * cursor = head;
 		node * prev = head;
-		while(cursor->link()!=NULL && cursor->data() > c)
+		while(cursor->link()!=NULL && cursor->data() < c)
 		{
 			prev = cursor;
 			cursor = cursor->link();
