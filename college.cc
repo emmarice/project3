@@ -1,6 +1,8 @@
-//college.cc
-//Emma Rice
-//3/1/2020
+//	college.cc
+//	Emma Rice
+//	3/1/2020
+//	Implementation of college class
+
 #include "college.h"
 #include "course.h"
 #include "Node.h"
@@ -8,14 +10,15 @@
 #include <fstream>
 #include <string>
 
-
+//adds a course object given in argument to the linked list, inserting it 
+//according to an alphabetical order imposed by the list
 void College::add(course c)
 {
 	if (head==NULL)
 	{
 		head = new node(c);
 	}
-	else //ADD ALPHABETICAL ORDER STUFF
+	else
 	{
 		node * cursor = head;
 		node * prev = head;
@@ -30,7 +33,7 @@ void College::add(course c)
 		}
 		else 
 		{
-			prev->set_link(new node(c)); //make sure this works!
+			prev->set_link(new node(c));
 			prev = prev->link();
 			prev->set_link(cursor);
 
@@ -38,6 +41,7 @@ void College::add(course c)
 	}
 }
 
+//passes all courses in list to an ostream that is given by argument
 void College::display(std::ostream& outs)
 {
 	//display all courses to stream
@@ -50,6 +54,9 @@ void College::display(std::ostream& outs)
 	}
 }
 
+//removes a course specified by course name in argument
+//by searching through the list and comparing course names
+//then linking the previous and next courses together
 void College::remove(std::string targ)
 {
 	if(head == NULL)
@@ -79,11 +86,13 @@ void College::remove(std::string targ)
 	}
 }
 
+//sets name of student
 void College::set_name(std::string name)
 {
 	fullname = name;
 }
 
+//returns total hours taken
 int College::hours()
 {
 	//return the total hours taken
@@ -97,6 +106,7 @@ int College::hours()
 	return hrs;
 }
 
+//calculates and returns gpa
 double College::gpa()
 {
 	node * cursor = head;
@@ -111,6 +121,7 @@ double College::gpa()
 	return (points/totalhrs);
 }
 
+//populated the college object with courses obtained from istream such as a file. student name should be given at top.
 void College::load(std::istream& ins)
 {
 	//load the student’s name (which will be the first thing 
@@ -133,9 +144,9 @@ void College::load(std::istream& ins)
     cursor->set_link(NULL);
 }
 
+//saves the name of student and contents of the list to an ostream
 void College::save(std::ostream& outs)
 {
-	//save the altered list to the same file when it is exiting
 	outs << fullname << std::endl;
 	node* cursor = head;
 	while(cursor!=NULL)
@@ -145,6 +156,7 @@ void College::save(std::ostream& outs)
     }
 }
 
+//default destructor
 College::~College()
 {
 	node* cursor = head->link();
@@ -156,6 +168,8 @@ College::~College()
 	}
 	delete head;
 }
+
+//copy constructor
 College::College(const College& other)
 {
 	fullname = other.fullname;
@@ -182,6 +196,8 @@ College::College(const College& other)
 	    cursor->set_link(NULL);
 	}//else
 }
+
+//assignment operator
 void College::operator =(const College& other)
 {
 	if(this == &other)
@@ -198,26 +214,23 @@ void College::operator =(const College& other)
 	delete head;
 
 	fullname = other.fullname;
-	if(other.head == NULL)
+	if(otherh == NULL)
 	{
-		head = NULL;
+		cursor->set_data(otherh->data());
+		cursor->set_link(NULL);
 		return;
 	}
 	else
 	{
-		head = new node;
-		node* cursor = head;
-		while(other.head!=NULL)
+		cursor->set_data(otherh->data());
+	    otherh = otherh->link();
+		while(otherh!=NULL)
 	    {
-	    	cursor->set_data(other.head->data());
-	    	other.head->set_link(other.head->link());
-	    	if(other.head == NULL)
-	    	{
-	    		cursor->set_link(NULL);
-	    		return;
-	    	}
 	    	cursor->set_link(new node);
 	    	cursor = cursor->link();
+	    	cursor->set_data(otherh->data());
+			otherh=otherh->link();
 	    }//while
+	    cursor->set_link(NULL);
 	}//else
 }
