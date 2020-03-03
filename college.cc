@@ -135,7 +135,7 @@ void College::load(std::istream& ins)
 void College::save(std::ostream& outs)
 {
 	//save the altered list to the same file when it is exiting
-	outs << fullname << endl;
+	outs << fullname << std::endl;
 	node* cursor = head;
 	while(cursor!=NULL)
     {
