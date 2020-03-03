@@ -170,7 +170,7 @@ College::College(const College& other)
 	}
 	else
 	{
-		cursor->set_data(otherhd->data());
+		cursor->set_data(otherh->data());
 	    otherh = otherh->link();
 		while(otherh!=NULL)
 	    {
